@@ -4,6 +4,7 @@ import Home from "./Home";
 import Parks from "./Parks";
 import Park from "./Park";
 import NewPark from "./NewPark";
+import Dashboard from "./Dashboard";
 
 export default (
   <Router>
@@ -12,6 +13,7 @@ export default (
       <Route path="/parks" exact component={Parks} />
       <Route path="/park/:id" exact component={Park} />
       <Route path="/park" exact component={NewPark} />
+      <Route path="/dashboard" exact component={Dashboard} />
     </Switch>
   </Router>
 );

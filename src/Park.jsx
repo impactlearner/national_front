@@ -1,35 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Dashboard from './Dashboard';
 
 class Park extends React.Component {
-    // VERIFY class of Park is established with React functionality
   constructor(props) {
-      // ASK Instructor to validate researched constructor with props as the 'parameter'
     super(props);
-      // ASK Instructor to verify "super" with 'parameter' of props
-    this.state = { park: { location: "" } };
-      // RESEARCH and ARTICULATE and ASK- the state of the current component is set to park with component of location
+    this.state = { 
+      park: { location: "" },
+      user: {},
+      dashboard: []
+   };
     this.addHtmlEntities = this.addHtmlEntities.bind(this);
-      // ASK - adds "addHtmlEntities" to the current component;
-    this.onClick = this.onClick.bind(this);
-      // binds "this" to the deleteRecipe method
+     
+    // this.onClick = this.onClick.bind(this);
+      // binds "this" to the deletePark method
   }
 
   componentDidMount() {
-      // VERIFY: ensure completion of component activation with a variable defined as the park in play using the park.id
-    // const {
-        // define the variable as a constant; match params gives you access to each park id through REACT ROUTER
-    //   match: {
-        // define/signify a correlation
-        // params: { id }
-        // params of the array instance defined as the park.id
-    //   }
-    // } = this.props;
-
     const id = this.props.match.params.id
-
-        // VERIFY: current component activated with prop(erties) of each consecutive park in the array
-
     const url = `http://localhost:3000/api/v1/show/${id}`;
         // set fetch address as reference to backend with point to the ids of each respective park
 
@@ -49,6 +37,21 @@ class Park extends React.Component {
         // if response is satisfactory, set state to "park: w/ response"
       .catch((Error) => console.log(Error));
         // if response has issues, show an error message
+
+        fetch(`http://localhost:3000/selections`)
+        .then(response => response.json())
+        .then(userArr => {
+          // receiving User from the backend
+          let userObj = userArr[0]
+          //sets the object to the first value in an array
+          this.setState({user: userObj})
+          // setting the empty user to the user that is pushed from the backend
+  })
+}
+
+  addToDashboard = (park) => {
+    // fetch to `http://localhost:3000/selections`, sent park_id and user_id; it will be a POST method
+    // import UserSelection.jsx to Park.jsx file AND send this addToDashboard fn to UserSelection as prop to handle addToDashboard click
   }
 
   addHtmlEntities(str) {
@@ -62,13 +65,11 @@ class Park extends React.Component {
             this.setState({ [event.target.name]: event.target.value });
           }
         
-          onClick(event) {
+          deletePark = (event) => {
               //This is the reference to the park id
             const id = this.props.match.params.id
-
-              // when the button is clicked, make a notification to back end to delete this park
             event.preventDefault();
-            // the url is determined by what is set up on the backend, which routes you can make requests to
+            // 3000 is the backend
             const url = `http://localhost:3000/api/v1/destroy/${id}`;
             fetch(url,{
             method: "DELETE",
@@ -88,28 +89,43 @@ class Park extends React.Component {
 
             };
 
-            // componentDidMount() {
-                // VERIFY w/instructor, "componentDidMount" - verifies execution of component
-            //   const url = "http://localhost:3000/api/v1/parks/index";
-              // perform a fetch, GET request to backend
-            //   fetch(url)
-              // fetch request to localhost:3000; upon receipt of response, verify, if ok, return response in json format; 
-              // throw an error if response is not correct
-                // .then(response => {
-                //   if (response.ok) {
-                //     return response.json();
-                //   }
-                //   throw new Error("Network response was not ok.");
-                // })
-                // .then(response => this.setState({ parks: response }))
-                // then, response sets component state to above array of "parks" with response from fetch populating the array
-                // .catch((Error) => console.log(Error));
-                // if there is an error, respond with "Error"
-        //   }
+            addToDashboard = (park) => {
+              // fetch to localhost:3000/selection, sent park_id and user_id; it will be a POST method
+              // Move fetch for User to Park.jsx AND set the state for User in Park.jsx
+              // Then, import Dashboard.jsx to Park.jsx file AND send this addToDashboard fn to Dashboard as prop to handle addToDashboard click
+            }
+
+            onChange(event) {
+              this.setState({ [event.target.name]: event.target.value });
+            }
+
+            onClick(event) {
+            const id = this.props.match.params.id
+            event.preventDefault();
+            const url = `http://localhost:3000/api/v1/show/${id}`;
+            fetch(url,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+              },
+              
+            })
+            .then(response => {
+                if (response.ok) {
+                  return response.json();
+                }
+                throw new Error("Network response was not ok.");
+              })
+              .then(() => this.props.history.push("/dashboard"))
+
+              //how to modify this fetch to push the park to the dashboard as PROPS
+
+              .catch(error => console.log(error.message));
+
+            };
 
 
   render() {
-        // VERIFY: render the  park 
     const { park } = this.state;
         // set the state of the current component to the variable of the park in play
     let locationList = "No parks available";
@@ -117,10 +133,7 @@ class Park extends React.Component {
     if (park.location.length > 0) {
       locationList = park.location
         .split(",")
-        // locationList is set equal to the location provided for the park
-        // an array is created for each part of the location address and mapped over 
-        // a "," splits each part of the location into lines
-        // if there is no location info, "No parks available" is rendered
+      
         .map((locations, index) => (
         // VERIFY: map through the location string for the park and set list item equal to key of index with each location
           <li key={index} className="list-group-item">
@@ -128,7 +141,7 @@ class Park extends React.Component {
           </li>
         ));
     }
-    // RESEARCH and VERIFY: {locations}
+    
     const parkDescription = this.addHtmlEntities(park.description);
 
     return (
@@ -137,7 +150,7 @@ class Park extends React.Component {
           <img
             src={park.image}
             alt={`${park.name} image`}
-            className="img-fluid position-absolute"
+            className="img-fluid"
           />
           <div className="overlay bg-dark position-absolute" />
           <h1 className="display-4 position-relative text-white">
@@ -162,10 +175,15 @@ class Park extends React.Component {
             </div>
             <div className="col-sm-12 col-lg-2">
                 
-              <button type="button" className="btn btn-danger" onClick={this.onClick}>
+              <button type="button" className="btn btn-danger" onClick={this.deletePark}>
                 Delete Park
               </button>
+                
+              <button type="button" className="btn btn-danger" onClick={this.addToDashboard}>
+                Add to Dashboard
+              </button>
             </div>
+            
           </div>
           <Link to="/parks" className="btn btn-link">
             Back to parks

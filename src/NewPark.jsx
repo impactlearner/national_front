@@ -27,9 +27,7 @@ class NewPark extends React.Component {
     }
   
     onSubmit(event) {
-        // when the form is submitted, make a fetch request to a url on the backend + send data with request
       event.preventDefault();
-      // the url is determined by what is set up on the backend, which routes you can make requests to
       const url = "http://localhost:3000/api/v1/parks/create";
       const { name, image, location, description } = this.state;
   

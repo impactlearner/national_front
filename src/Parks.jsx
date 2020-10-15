@@ -1,24 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom"; // VERIFY Understanding of "Link"
+import { Link } from "react-router-dom";
 
 class Parks extends React.Component {
-    //sets class component with React functionality
+ 
   constructor(props) {
-      //CLARIFY "constructor" and "props"
     super(props);
-    // CLARIFY "super" and SOLIDIFY "props"
     this.state = {
-        // sets state of component as an empty array of parks to be populated by fetch
-      parks: []
+      parks: [],
+      user: {},
+      dashboard: []
     };
   }
   componentDidMount() {
-      // VERIFY w/instructor, "componentDidMount" - verifies execution of component
     const url = "http://localhost:3000/api/v1/parks/index";
-    // perform a fetch, GET request to backend
     fetch(url)
-    // fetch request to localhost:3000; upon receipt of response, verify, if ok, return response in json format; 
-    // throw an error if response is not correct
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -26,24 +21,27 @@ class Parks extends React.Component {
         throw new Error("Network response was not ok.");
       })
       .then(response => this.setState({ parks: response }))
-      // then, response sets component state to above array of "parks" with response from fetch populating the array
       .catch((Error) => console.log(Error));
-      // if there is an error, respond with "Error"
+
+      fetch(`http://localhost:3000/users`)
+      .then(response => response.json())
+      .then(userArr => {
+        let userObj = userArr[0]
+        this.setState({user: userObj})
+      })
 }
+
+
 render() {
     const { parks } = this.state;
-    // console.log(parks)
-    // VERIFY activated variable of parks is set equal to the state of current component
+     console.log(this.state.user)
     const allParks = parks.map((park, index) => (
-        // VERIFY variable allParks is set equal to function of mapping through parks array and pulling values of park and index
       <div key={index} className="col-md-6 col-lg-4">
         <div className="card mb-4">
           <img
             src={park.image}
-            // src is set equal to the image componet of the park instance pulled from the array
             className="card-img-top"
             alt={`${park.name} image`}
-            // VERIFY if card image is not available, render name of park with the word "image" appended
           />
           <div className="card-body">
             <h5 className="card-title">{park.name}</h5>
@@ -77,6 +75,11 @@ render() {
             <div className="text-right mb-3">
               <Link to="/park" className="btn custom-button">
                 Add New Park
+              </Link>
+            </div>
+            <div className="text-right mb-4">
+              <Link to="/dashboard" className="btn custom-button">
+                Dashboard
               </Link>
             </div>
             <div className="row">
