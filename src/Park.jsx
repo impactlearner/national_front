@@ -49,11 +49,6 @@ class Park extends React.Component {
   })
 }
 
-  addToDashboard = (park) => {
-    // fetch to `http://localhost:3000/selections`, sent park_id and user_id; it will be a POST method
-    // import UserSelection.jsx to Park.jsx file AND send this addToDashboard fn to UserSelection as prop to handle addToDashboard click
-  }
-
   addHtmlEntities(str) {
     return String(str)
       .replace(/&lt;/g, "<")
@@ -61,14 +56,10 @@ class Park extends React.Component {
   }
         // the addHtmlEntities method, which takes a string and replaces all escaped opening and 
         // closing brackets with their HTML entities. This will help convert whatever escaped character was saved in the park description
-        onChange(event) {
-            this.setState({ [event.target.name]: event.target.value });
-          }
         
           deletePark = (event) => {
               //This is the reference to the park id
             const id = this.props.match.params.id
-            event.preventDefault();
             // 3000 is the backend
             const url = `http://localhost:3000/api/v1/destroy/${id}`;
             fetch(url,{
@@ -93,36 +84,31 @@ class Park extends React.Component {
               // fetch to localhost:3000/selection, sent park_id and user_id; it will be a POST method
               // Move fetch for User to Park.jsx AND set the state for User in Park.jsx
               // Then, import Dashboard.jsx to Park.jsx file AND send this addToDashboard fn to Dashboard as prop to handle addToDashboard click
-            }
-
-            onChange(event) {
-              this.setState({ [event.target.name]: event.target.value });
-            }
-
-            onClick(event) {
-            const id = this.props.match.params.id
-            event.preventDefault();
-            const url = `http://localhost:3000/api/v1/show/${id}`;
-            fetch(url,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-              },
               
-            })
-            .then(response => {
-                if (response.ok) {
-                  return response.json();
-                }
-                throw new Error("Network response was not ok.");
-              })
-              .then(() => this.props.history.push("/dashboard"))
+                const id = this.props.match.params.id
+                const url = `http://localhost:3000/selections`;
+                fetch(url,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                  },
+                  
+                })
+                .then(response => {
+                    if (response.ok) {
+                      return response.json();
+                    }
+                    throw new Error("Network response was not ok.");
+                  })
+                  .then(() => this.props.history.push("/dashboard"))
+    
+                  //how to modify this fetch to push the park to the dashboard as PROPS
+    
+                  .catch(error => console.log(error.message));
+                };
 
-              //how to modify this fetch to push the park to the dashboard as PROPS
-
-              .catch(error => console.log(error.message));
-
-            };
+           
+            
 
 
   render() {

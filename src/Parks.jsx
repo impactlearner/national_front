@@ -11,6 +11,7 @@ class Parks extends React.Component {
       dashboard: []
     };
   }
+  
   componentDidMount() {
     const url = "http://localhost:3000/api/v1/parks/index";
     fetch(url)
