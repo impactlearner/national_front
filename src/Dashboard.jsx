@@ -12,6 +12,7 @@ class Dashboard extends React.Component {
       }
 
     componentDidMount() {
+      // whenever Dashboard is visited, a fresh request to selections is made
         const url = "http://localhost:3000/selections";
         fetch(url)
           .then(response => {

@@ -7,7 +7,7 @@ class Park extends React.Component {
     super(props);
     this.state = { 
       park: { location: "" },
-      user: {},
+      user: {id: 7, username: "Time"},
       dashboard: []
    };
     this.addHtmlEntities = this.addHtmlEntities.bind(this);
@@ -38,15 +38,7 @@ class Park extends React.Component {
       .catch((Error) => console.log(Error));
         // if response has issues, show an error message
 
-        fetch(`http://localhost:3000/selections`)
-        .then(response => response.json())
-        .then(userArr => {
-          // receiving User from the backend
-          let userObj = userArr[0]
-          //sets the object to the first value in an array
-          this.setState({user: userObj})
-          // setting the empty user to the user that is pushed from the backend
-  })
+  
 }
 
   addHtmlEntities(str) {
@@ -84,7 +76,10 @@ class Park extends React.Component {
               // fetch to localhost:3000/selection, sent park_id and user_id; it will be a POST method
               // Move fetch for User to Park.jsx AND set the state for User in Park.jsx
               // Then, import Dashboard.jsx to Park.jsx file AND send this addToDashboard fn to Dashboard as prop to handle addToDashboard click
-              
+               const body = {
+                user_id: this.state.user.id,
+                park_id: this.props.match.params.id
+              }
                 const id = this.props.match.params.id
                 const url = `http://localhost:3000/selections`;
                 fetch(url,{
@@ -92,6 +87,7 @@ class Park extends React.Component {
                 headers: {
                     "Content-Type": "application/json"
                   },
+                  body: JSON.stringify(body)
                   
                 })
                 .then(response => {
@@ -106,9 +102,6 @@ class Park extends React.Component {
     
                   .catch(error => console.log(error.message));
                 };
-
-           
-            
 
 
   render() {
