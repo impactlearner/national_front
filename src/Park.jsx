@@ -110,6 +110,7 @@ class Park extends React.Component {
     let locationList = "No parks available";
         // console.log(this.state)
     if (park.location.length > 0) {
+      
       locationList = park.location
         .split(",")
       
