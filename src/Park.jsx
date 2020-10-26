@@ -98,7 +98,7 @@ class Park extends React.Component {
                   })
                   .then(() => this.props.history.push("/dashboard"))
     
-                  //how to modify this fetch to push the park to the dashboard as PROPS
+                  // modify fetch to push the park to the dashboard as PROPS
     
                   .catch(error => console.log(error.message));
                 };
@@ -106,11 +106,11 @@ class Park extends React.Component {
 
   render() {
     const { park } = this.state;
-        // set the state of the current component to the variable of the park in play
+        // sets the state of the current component to the variable of the park in play
     let locationList = "No parks available";
         // console.log(this.state)
     if (park.location.length > 0) {
-      
+
       locationList = park.location
         .split(",")
       
