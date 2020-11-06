@@ -98,7 +98,7 @@ class Park extends React.Component {
                   })
                   .then(() => this.props.history.push("/dashboard"))
     
-                  // design fetch to push the park to the dashboard as PROPS
+                  // implement fetch to push the park to the dashboard as PROPS
     
                   .catch(error => console.log(error.message));
                 };
