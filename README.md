@@ -3,3 +3,5 @@ This app is designed around National Parks in the United States with a focus on 
 The logic contained in the controllers.
 
 React frontend
+
+Custom data setup.
