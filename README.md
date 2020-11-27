@@ -4,4 +4,4 @@ The logic contained in the controllers.
 
 React frontend
 
-Custom data setup.
+Custom data setup on backend.
