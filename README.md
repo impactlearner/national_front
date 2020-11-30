@@ -4,4 +4,4 @@ The logic is contained in the controllers.
 
 React frontend
 
-Custom data schema setup on backend. s
+Customized data schema setup on backend. s
