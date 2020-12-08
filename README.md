@@ -4,4 +4,4 @@ The logic is contained in the controllers.
 
 React frontend
 
-On the back end, I instantiated a customized data schema for the parks information.
+On the back end, with Ruby on Rails, I instantiated a customized data schema for the parks information.
