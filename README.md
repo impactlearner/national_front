@@ -5,4 +5,4 @@ The logic is contained in the controllers.
 React frontend
 
 Ruby on Rails backend:
-On the back-end, there is an instantiation of a customized data schema for relating the parks information; this schema acts as the Ruby on Rails-based database.
+On the back-end, an instantiation of a customized data schema for relating the parks information; this schema acts as the Ruby on Rails-based database.
