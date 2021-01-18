@@ -1,6 +1,6 @@
 National Treasures explores National Parks in the United States with a focus on the African-American Hertitage series. Users may get an overview of the parks' historical perspectives and utilize the dashboard to plan trips. National Treasurers is built with a Ruby on Rails backend as an API and a React frontend.
 
-The application logic is contained in the controllers.
+The logic for the application is contained in the controllers.
 
 React frontend:
 
