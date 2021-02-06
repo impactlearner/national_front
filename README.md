@@ -5,4 +5,4 @@ The application logic is contained in the controllers.
 React frontend:
 
 Backend: Ruby on Rails
-On the back-end, a customized data schema is instantiated; this is instrumental in relating the parks information; this schema acts as the Ruby on Rails-based database.
+On the back-end, a customized data schema is instantiated; this relates the parks' information; this schema acts as the Ruby on Rails-based database.
