@@ -5,4 +5,4 @@ National Treasures explores National Parks in the United States focused on the A
 React frontend:
 
 Backend: Ruby on Rails
-On the back-end, there is a customized data schema instantiated; this relates the parks' information; this schema acts as the Ruby on Rails-based database.
+On the back-end, there is a customized data schema instantiated; this relates the parks' information; this schema is integral to the Ruby on Rails-based database.
