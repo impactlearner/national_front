@@ -1,4 +1,4 @@
-National Treasures explores National Parks in the United States focused on the African-American Hertitage series. The application provides an overview of the parks' historical perspectives and utilize the dashboard to plan trips. National Treasures is built with a Ruby on Rails API integrated on the backend and a React frontend with custom CSS.
+National Treasures explores National Parks in the United States focused on the African-American Hertitage series. The application provides an overview of the parks' historical perspectives and incorporates a dashboard to plan trips. National Treasures is built with a Ruby on Rails API integrated on the backend and a React frontend with custom CSS.
 
 // The application logic is contained in the controllers.
 
